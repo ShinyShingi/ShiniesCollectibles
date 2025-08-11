@@ -1,0 +1,11 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" fill="#E5E7EB"/>
+  <rect x="20" y="15" width="80" height="90" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="2"/>
+  <rect x="25" y="25" width="50" height="4" fill="#6B7280"/>
+  <rect x="25" y="35" width="60" height="3" fill="#9CA3AF"/>
+  <rect x="25" y="43" width="45" height="3" fill="#9CA3AF"/>
+  <rect x="25" y="60" width="40" height="2" fill="#D1D5DB"/>
+  <rect x="25" y="67" width="35" height="2" fill="#D1D5DB"/>
+  <rect x="25" y="74" width="45" height="2" fill="#D1D5DB"/>
+  <text x="60" y="115" text-anchor="middle" fill="#6B7280" font-family="Arial, sans-serif" font-size="12">Book</text>
+</svg>

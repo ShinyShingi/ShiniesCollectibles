@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: shinies_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: deimudda
+      MYSQL_DATABASE: shinies_collectibles
+      MYSQL_USER: shinies
+      MYSQL_PASSWORD: deimudda
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - shinies_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Laravel Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: shinies_backend
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=shinies_collectibles
+      - DB_USERNAME=shinies
+      - DB_PASSWORD=deimudda
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/var/www/html
+      - /var/www/html/vendor
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - shinies_network
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  # Vue Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: shinies_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - shinies_network
+    command: npm run dev -- --host
+
+volumes:
+  mysql_data:
+
+networks:
+  shinies_network:
+    driver: bridge

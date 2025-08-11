@@ -1,0 +1,14 @@
+[0;1;32m●[0m docker-ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.scope - libcontainer container ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75
+     Loaded: loaded (]8;;file://Ubukuebel/run/systemd/transient/docker-ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.scope/run/systemd/transient/docker-ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.scope]8;;; transient[0;1;32m[0m)
+  Transient: yes
+    Drop-In: /run/systemd/transient/docker-ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.scope.d
+             └─]8;;file://Ubukuebel/run/systemd/transient/docker-ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.scope.d/50-DeviceAllow.conf50-DeviceAllow.conf]8;;, ]8;;file://Ubukuebel/run/systemd/transient/docker-ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.scope.d/50-DevicePolicy.conf50-DevicePolicy.conf]8;;
+     Active: [0;1;32mactive (running)[0m since Mon 2025-08-11 23:04:17 CEST; 3min 1s ago
+         IO: 1.8M read, 14.3M written
+      Tasks: 37 (limit: 18524)
+     Memory: 376.1M (peak: 390.4M)
+        CPU: 2.982s
+     CGroup: /system.slice/docker-ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.scope
+             └─[0;38;5;245m2122070 mysqld[0m
+
+Aug 11 23:04:17 Ubukuebel systemd[1]: Started docker-ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.scope - libcontainer container ddcac93f99ff6a4ca75a5426bd0c088e9d60157519b4ec3d79c1758374016a75.
