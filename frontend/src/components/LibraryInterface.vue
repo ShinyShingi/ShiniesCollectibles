@@ -85,20 +85,18 @@
         
         <div class="filter-section">
           <label class="filter-label">Year Range</label>
-          <div class="flex gap-2">
+          <div class="grid grid-cols-2 gap-2">
             <InputNumber
               v-model="filters.yearFrom"
               placeholder="From"
               :min="1800"
               :max="new Date().getFullYear() + 10"
-              class="w-full"
             />
             <InputNumber
               v-model="filters.yearTo"
               placeholder="To"
               :min="1800"
               :max="new Date().getFullYear() + 10"
-              class="w-full"
             />
           </div>
         </div>

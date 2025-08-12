@@ -3,9 +3,9 @@ import api from '../services/api';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
     token: localStorage.getItem('token') || null,
-    isAuthenticated: false,
+    isAuthenticated: !!localStorage.getItem('token'),
     loading: false,
     error: null,
   }),
@@ -25,6 +25,7 @@ export const useAuthStore = defineStore('auth', {
         this.user = response.data.user;
         this.isAuthenticated = true;
         localStorage.setItem('token', this.token);
+        localStorage.setItem('user', JSON.stringify(this.user));
         return response.data;
       } catch (error) {
         this.error = error.response?.data?.message || 'Registration failed';
@@ -43,6 +44,7 @@ export const useAuthStore = defineStore('auth', {
         this.user = response.data.user;
         this.isAuthenticated = true;
         localStorage.setItem('token', this.token);
+        localStorage.setItem('user', JSON.stringify(this.user));
         return response.data;
       } catch (error) {
         this.error = error.response?.data?.message || 'Login failed';
@@ -62,6 +64,7 @@ export const useAuthStore = defineStore('auth', {
         this.token = null;
         this.isAuthenticated = false;
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
       }
     },
 
@@ -72,11 +75,14 @@ export const useAuthStore = defineStore('auth', {
         const response = await api.get('/user');
         this.user = response.data;
         this.isAuthenticated = true;
+        localStorage.setItem('user', JSON.stringify(this.user));
         return response.data;
       } catch (error) {
         this.token = null;
+        this.user = null;
         this.isAuthenticated = false;
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         throw error;
       }
     },
