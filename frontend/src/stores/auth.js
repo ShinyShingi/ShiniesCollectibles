@@ -88,8 +88,20 @@ export const useAuthStore = defineStore('auth', {
     },
 
     checkAuth() {
-      if (this.token) {
+      if (this.token && !this.user) {
         this.fetchUser();
+      }
+    },
+    
+    // Initialize auth state from localStorage
+    initialize() {
+      const token = localStorage.getItem('token');
+      const user = localStorage.getItem('user');
+      
+      if (token && user) {
+        this.token = token;
+        this.user = JSON.parse(user);
+        this.isAuthenticated = true;
       }
     },
   },

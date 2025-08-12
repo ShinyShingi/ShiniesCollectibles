@@ -36,6 +36,29 @@ const routes = [
     component: () => import('../views/Music.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/library',
+    name: 'Library',
+    component: () => import('../components/LibraryInterface.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/wishlists',
+    name: 'Wishlists',
+    component: () => import('../views/Wishlists.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/wishlists/:id',
+    name: 'WishlistDetail',
+    component: () => import('../views/WishlistDetail.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/wishlists/public/:shareToken',
+    name: 'PublicWishlist',
+    component: () => import('../views/PublicWishlist.vue'),
+  },
 ];
 
 const router = createRouter({
@@ -43,7 +66,7 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore();
   
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {

@@ -76,4 +76,23 @@ class Item extends Model
     {
         return $query->where('owned', true);
     }
+
+    public function priceChecks()
+    {
+        return $this->hasMany(PriceCheck::class);
+    }
+
+    public function latestPriceChecks()
+    {
+        return $this->hasMany(PriceCheck::class)
+            ->latest('checked_at')
+            ->available();
+    }
+
+    public function getIsbnAttribute()
+    {
+        return $this->identifiers()
+            ->where('type', 'isbn')
+            ->first()?->value;
+    }
 }

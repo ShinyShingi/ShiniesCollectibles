@@ -26,7 +26,15 @@ import Toolbar from 'primevue/toolbar';
 import SplitButton from 'primevue/splitbutton';
 import Menu from 'primevue/menu';
 import Badge from 'primevue/badge';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+import ProgressSpinner from 'primevue/progressspinner';
+import AutoComplete from 'primevue/autocomplete';
+import Rating from 'primevue/rating';
 import Tooltip from 'primevue/tooltip';
+
+// Global components
+import AppLayout from './components/AppLayout.vue';
 
 // PrimeVue Theme (v4 uses different approach)
 import 'primeicons/primeicons.css';
@@ -41,6 +49,7 @@ app.use(PrimeVue, {
         preset: Aura
     }
 });
+app.use(ToastService);
 
 // Register PrimeVue components globally
 app.component('DataTable', DataTable);
@@ -62,6 +71,11 @@ app.component('Toolbar', Toolbar);
 app.component('SplitButton', SplitButton);
 app.component('Menu', Menu);
 app.component('Badge', Badge);
+app.component('Toast', Toast);
+app.component('ProgressSpinner', ProgressSpinner);
+app.component('AutoComplete', AutoComplete);
+app.component('Rating', Rating);
+app.component('AppLayout', AppLayout);
 
 // Register directives
 app.directive('tooltip', Tooltip);

@@ -3,6 +3,9 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\CollectionController;
+use App\Http\Controllers\Api\PriceCheckController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\PriceAlertController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +33,29 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/search/music/catalog', [ItemController::class, 'searchMusicByCatalog']);
     });
     Route::post('/items/from-api', [ItemController::class, 'createFromApiData']);
+    
+    // Price checking routes
+    Route::prefix('items/{item}/price-checks')->group(function () {
+        Route::get('/', [PriceCheckController::class, 'index']);
+        Route::post('/refresh', [PriceCheckController::class, 'refresh']);
+        Route::get('/history', [PriceCheckController::class, 'history']);
+        Route::get('/statistics', [PriceCheckController::class, 'statistics']);
+    });
+    
+    // Wishlist routes
+    Route::apiResource('wishlists', WishlistController::class);
+    Route::post('/wishlists/{wishlist}/items', [WishlistController::class, 'addItem']);
+    Route::delete('/wishlists/{wishlist}/items', [WishlistController::class, 'removeItem']);
+    Route::put('/wishlists/{wishlist}/items', [WishlistController::class, 'updateItem']);
+    Route::post('/wishlists/{wishlist}/toggle-public', [WishlistController::class, 'togglePublic']);
+    
+    // Price alert routes
+    Route::get('/price-alerts', [PriceAlertController::class, 'index']);
+    Route::get('/price-alerts/statistics', [PriceAlertController::class, 'statistics']);
+    Route::patch('/price-alerts/{priceAlert}/read', [PriceAlertController::class, 'markAsRead']);
+    Route::patch('/price-alerts/mark-all-read', [PriceAlertController::class, 'markAllAsRead']);
+    Route::delete('/price-alerts/{priceAlert}', [PriceAlertController::class, 'destroy']);
 });
+
+// Public wishlist routes (no authentication required)
+Route::get('/wishlists/public/{shareToken}', [WishlistController::class, 'public']);
